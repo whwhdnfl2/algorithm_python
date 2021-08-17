@@ -8,3 +8,4 @@ for i in range(N):
 print(mmap)
 
 for i in range(N*N):
+ㅁㄴㅇ
