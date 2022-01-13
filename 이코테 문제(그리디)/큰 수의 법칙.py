@@ -8,8 +8,8 @@ ans = 0
 for i in range(m):
     count += 1
     if count > k:
-        count = 0
         ans += data[1]
+        count = 0
         continue
     ans += data[0]
 
