@@ -1,5 +1,5 @@
 #아이디어 자체는 맞았으나 구현에서 막힘
-
+#https://programmers.co.kr/learn/courses/30/lessons/42891?language=python3#
 def solution(food_times, k):
     left_count = k
 
