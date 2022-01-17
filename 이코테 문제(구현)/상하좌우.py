@@ -1,22 +1,22 @@
-n = int(input())
+N = int(input())
+A = list(map(str, input().split()))
 
-plans = input().split()
+ans = [1, 1]
+dx = [0, 0, 1, -1] #RLDU
+dy = [1, -1, 0, 0]
 
-dx = [0, -1, 1, 0]
-dy = [-1, 0, 0, 1]
+for i in A:
+    if i == 'R' and ans[1] < N:
+        ans[0] += dx[0]
+        ans[1] += dy[0]
+    elif i == 'L' and ans[1] > 1:
+        ans[0] += dx[1]
+        ans[1] += dy[1]
+    elif i == 'D' and ans[0] < N:
+        ans[0] += dx[2]
+        ans[1] += dy[2]
+    if i == 'U' and ans[0] > 1:
+        ans[0] += dx[3]
+        ans[1] += dy[3]
 
-move = ['L', 'U', 'D', 'R']
-
-x, y = 1, 1
-
-for plan in plans:
-    for i in range(len(move)):
-        if move[i] == plan:
-            temp_x = x + dx[i]
-            temp_y = y + dy[i]
-    if temp_x < 1 or temp_x > n or temp_y < 1 or temp_y > n:
-        continue
-    x = temp_x
-    y = temp_y
-
-print(x, y)
+print(ans)
