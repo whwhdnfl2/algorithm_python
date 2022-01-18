@@ -21,7 +21,6 @@ for i in range(L):
     direction_info.append((A, B))
 
 #print(direction_info)
-#print(MAP)
 now = deque()
 now.append([x, y])
 
