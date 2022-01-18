@@ -1,8 +1,7 @@
-from collections import deque
 
-now = deque()
+ans = 0
 
-now.appendleft([1, 2])
-print(now.popleft())
-
-
+for i in range(1,10000):
+    for j in range(1, 10000):
+        ans += 1
+print(ans)
