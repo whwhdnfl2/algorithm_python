@@ -1,7 +1,6 @@
 
-ans = 0
+ans = "asdasdasd"
 
-for i in range(1,10000):
-    for j in range(1, 10000):
-        ans += 1
-print(ans)
+print(ans[:20])
+for i in range(2, 24, 2):
+    print(i)
