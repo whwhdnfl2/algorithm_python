@@ -1,6 +1,8 @@
+#2차원 배열
+N = 3
+M = 5
+data3 = [[0] * M for i in range(N)]
+print(data3)
 
-ans = "asdasdasd"
-
-print(ans[:20])
-for i in range(2, 24, 2):
-    print(i)
+data4 = [0] * M
+print(data4)
