@@ -8,42 +8,55 @@ union = []
 def dfs(data, data1, x, y):
     if data1[x][y] == 1:
         return
-    data1[x][y] = 1
     union.append([x, y])
-    if x-1 > 0 and L <= abs(data[x][y] - data[x-1][y]) <= R:
+    data1[x][y] = 1
+    if x-1 >= 0 and L <= abs(data[x][y] - data[x-1][y]) <= R and data1[x-1][y] == 0:
         dfs(data, data1, x-1, y)
-    if x+1 < N and L <= abs(data[x][y] - data[x+1][y]) <= R:
+    if x+1 < N and L <= abs(data[x][y] - data[x+1][y]) <= R and data1[x+1][y] == 0:
         dfs(data, data1, x+1, y)
-    if y-1 > 0 and L <= abs(data[x][y] - data[x][y-1]) <= R:
+    if y-1 >= 0 and L <= abs(data[x][y] - data[x][y-1]) <= R and data1[x][y-1] == 0:
         dfs(data, data1, x, y-1)
-    if y+1 < N and L <= abs(data[x][y] - data[x][y+1]) <= R:
+    if y+1 < N and L <= abs(data[x][y] - data[x][y+1]) <= R and data1[x][y+1] == 0:
         dfs(data, data1, x, y+1)
-    ans = 0
-    count1 = 0
-    for i in union:
-        count1 += 1
-        ans += data[i[0]][i[1]]
-    ans //= count1
-    for i in union:
-        data[i[0]][i[1]] = ans
+
+dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
+def dfs2(data, data1, x, y):
+    if data1[x][y] == 1:
+        return
+    union.append([x, y])
+    data1[x][y] = 1
+    for i in range(4):
+        nx, ny = x + dx[i], y + dy[i]
+        if 0 <= nx < N and 0 <= ny < N: #and not data1[nx][ny]:
+            if L <= abs(data[x][y] - data[nx][ny]) <= R:
+                #union.append([nx, ny])
+                dfs2(data, data1, nx, ny)
 
 
-count = 0
-while flag:
+ans = 0
+while True:
     flag = False
-    count += 1
     data1 = [[0] * N for i in range(N)]
+    dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
     for i in range(N):
         for j in range(N):
-            if data1[i][j] == 1:
-                continue
-            dfs(data, data1, i, j)
-            if len(union) > 1:
-                flag = True
-            print(union)
-            union = []
-            print(data1)
-            print(data)
-    print(flag)
+            #union.append([i, j])
+            if data1[i][j] != 1:
+                #print(i, j)
+                dfs(data, data1, i, j)
 
-print(count - 1)
+                if len(union) > 1:
+                    flag = True
+                    sum = 0
+                    for k in union:
+                        sum += data[k[0]][k[1]]
+                    sum = sum // len(union)
+                    for k in union:
+                        data[k[0]][k[1]] = sum
+            #print(union)
+            union = []
+    #print(data)
+    if not flag:
+        break
+    ans += 1
+print(ans)
