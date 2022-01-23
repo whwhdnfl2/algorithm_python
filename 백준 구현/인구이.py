@@ -31,9 +31,8 @@ def dfs2(data, data1, x, y):
     data1[x][y] = 1
     for i in range(4):
         nx, ny = x + dx[i], y + dy[i]
-        if 0 <= nx < N and 0 <= ny < N: #and not data1[nx][ny]:
+        if 0 <= nx < N and 0 <= ny < N:
             if L <= abs(data[x][y] - data[nx][ny]) <= R:
-                #union.append([nx, ny])
                 dfs2(data, data1, nx, ny)
 
 
@@ -44,11 +43,8 @@ while True:
     dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
     for i in range(N):
         for j in range(N):
-            #union.append([i, j])
             if data1[i][j] != 1:
-                #print(i, j)
                 dfs(data, data1, i, j)
-
                 if len(union) > 1:
                     flag = True
                     sum = 0
@@ -57,9 +53,7 @@ while True:
                     sum = sum // len(union)
                     for k in union:
                         data[k[0]][k[1]] = sum
-            #print(union)
             union = []
-    #print(data)
     if not flag:
         break
     ans += 1
