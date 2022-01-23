@@ -5,7 +5,6 @@ for i in range(N):
 data1 = [[0]*N for i in range(N)]
 flag = True
 union = []
-
 def dfs(data, data1, x, y):
     if data1[x][y] == 1:
         return
@@ -19,6 +18,15 @@ def dfs(data, data1, x, y):
         dfs(data, data1, x, y-1)
     if y+1 < N and L <= abs(data[x][y] - data[x][y+1]) <= R:
         dfs(data, data1, x, y+1)
+    ans = 0
+    count1 = 0
+    for i in union:
+        count1 += 1
+        ans += data[i[0]][i[1]]
+    ans //= count1
+    for i in union:
+        data[i[0]][i[1]] = ans
+
 
 count = 0
 while flag:
@@ -32,14 +40,10 @@ while flag:
             dfs(data, data1, i, j)
             if len(union) > 1:
                 flag = True
-                ans = 0
-                count1 = 0
-                for k in union:
-                    count1 += 1
-                    ans += data[k[0]][k[1]]
-                ans //= count1
-                for k in union:
-                    data[k[0]][k[1]] = ans
+            print(union)
             union = []
+            print(data1)
+            print(data)
+    print(flag)
 
 print(count - 1)
