@@ -4,9 +4,9 @@ eat = list(map(int, input().split()))
 
 data[0] = eat[0]
 data[1] = max(eat[0], eat[1])
-data[2] = max(eat[1], eat[0] + eat[2])
-for i in range(3, N):
-    data[i] = data[i - 3] + eat[i]
+#data[2] = max(eat[1], eat[0] + eat[2])
+for i in range(2, N):
+    #data[i] = data[i - 3] + eat[i]
     data[i] = max(data[i], data[i - 1])
     data[i] = max(data[i], data[i - 2] + eat[i])
 print(data[N - 1])
