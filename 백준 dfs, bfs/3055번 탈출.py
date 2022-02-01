@@ -64,4 +64,3 @@ def bfs(star, Sx, Sy):
 
 
 bfs(star, S_x, S_y)
-
