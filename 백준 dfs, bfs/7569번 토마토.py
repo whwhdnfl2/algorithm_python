@@ -1,4 +1,5 @@
 from collections import deque
+import sys
 
 M, N, H = map(int, input().split())
 data = [[] for j in range(H)]
@@ -7,7 +8,8 @@ visited = [[[0] * M for _ in range(N)] for _ in range(H)]
 
 for i in range(H):
     for j in range(N):
-        data[i].append(list(map(int, input().split())))
+        a = sys.stdin.readline()
+        data[i].append(list(map(int, a.split())))
 
 
 one = []
