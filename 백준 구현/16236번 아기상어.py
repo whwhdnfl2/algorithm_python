@@ -46,6 +46,8 @@ def bfs(a, b):
                                     if visited[x2][y2] + 1 < visited[x][y] + 1:
                                         real_x = nx2
                                         real_y = ny2
+                                        x = x2
+                                        y = y2
                                     elif visited[x2][y2] + 1 == visited[x][y] + 1:
                                         if real_x > nx2:
                                             real_y = ny2
