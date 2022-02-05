@@ -31,10 +31,30 @@ def bfs(a, b):
             ny = y + dy[i]
             if 0 <= nx < N and 0 <= ny < N:
                 if visited[nx][ny] == 0 and 0 < data[nx][ny] < big:
-                    data[a][b] = 0
-                    data[nx][ny] = 9
-                    visited[nx][ny] = visited[x][y] + 1
-                    return [nx, ny]
+                    # print(nx, ny)
+                    # print(queue)
+                    # print(visited)
+                    real_x = nx
+                    real_y = ny
+                    while queue:
+                        x2, y2 = queue.popleft()
+                        for j in range(4):
+                            nx2 = x2 + dx[j]
+                            ny2 = y2 + dy[j]
+                            if 0 <= nx2 < N and 0 <= ny2 < N:
+                                if visited[nx2][ny2] == 0 and 0 < data[nx2][ny2] < big:
+                                    if visited[x2][y2] + 1 < visited[x][y] + 1:
+                                        real_x = nx2
+                                        real_y = ny2
+                                    elif visited[x2][y2] + 1 == visited[x][y] + 1:
+                                        if real_x > nx2:
+                                            real_y = ny2
+                                            real_x = nx2
+                                        elif real_x == nx2 and real_y > ny2:
+                                            real_x = nx2
+                                            real_y = ny2
+                    visited[real_x][real_y] = visited[x][y] + 1
+                    return [real_x, real_y]
                 if visited[nx][ny] == 0 and data[nx][ny] == 0:
                     visited[nx][ny] = visited[x][y] + 1
                     queue.append([nx, ny])
@@ -48,14 +68,20 @@ count = 0
 ans = 0
 while True:
     visited = [[0] * N for _ in range(N)]
-    shark_x, shark_y = bfs(shark_x, shark_y)
+    before_x, before_y = shark_x, shark_y
+    shark_x, shark_y = bfs(before_x, before_y)
     if shark_x == "g" and shark_y == "g":
         break
     else:
         ans = ans + visited[shark_x][shark_y] - 1
+        data[before_x][before_y] = 0
+        data[shark_x][shark_y] = 9
         count += 1
         if count == big:
             count = 0
             big += 1
-    print(data)
+    # for i in data:
+    #     print(i)
+    # print(big)
+    # print()
 print(ans)
