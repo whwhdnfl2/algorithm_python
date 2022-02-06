@@ -1,3 +1,5 @@
+#해결은 했지만 더 쉽게 풀 방법 찾아보기
+
 from collections import deque
 import sys
 
