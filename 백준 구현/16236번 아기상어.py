@@ -31,9 +31,6 @@ def bfs(a, b):
             ny = y + dy[i]
             if 0 <= nx < N and 0 <= ny < N:
                 if visited[nx][ny] == 0 and 0 < data[nx][ny] < big:
-                    # print(nx, ny)
-                    # print(queue)
-                    # print(visited)
                     real_x = nx
                     real_y = ny
                     while queue:
@@ -82,8 +79,5 @@ while True:
         if count == big:
             count = 0
             big += 1
-    # for i in data:
-    #     print(i)
-    # print(big)
-    # print()
+
 print(ans)

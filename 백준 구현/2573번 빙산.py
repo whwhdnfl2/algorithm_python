@@ -13,7 +13,8 @@ for i in range(N):
     for j in range(M):
         if data[i][j] != 0:
             not_one.append([i, j])
-# print(not_one)
+
+
 def bfs(a, b):
     queue = deque()
     queue.append([a, b])
@@ -49,12 +50,6 @@ while True:
             flag = True
             bfs(i[0], i[1])
             count += 1
-    # for i in data:
-    #     print(i)
-    # print()
-    # for i in visited:
-    #     print(i)
-    # print(count)
     if not flag:
         ans = 0
         break
