@@ -43,12 +43,12 @@ def bfs(a, b):
                             ny2 = y2 + dy[j]
                             if 0 <= nx2 < N and 0 <= ny2 < N:
                                 if visited[nx2][ny2] == 0 and 0 < data[nx2][ny2] < big:
-                                    if visited[x2][y2] + 1 < visited[x][y] + 1:
+                                    if visited[x2][y2] < visited[x][y]:
                                         real_x = nx2
                                         real_y = ny2
                                         x = x2
                                         y = y2
-                                    elif visited[x2][y2] + 1 == visited[x][y] + 1:
+                                    elif visited[x2][y2] == visited[x][y]:
                                         if real_x > nx2:
                                             real_y = ny2
                                             real_x = nx2
