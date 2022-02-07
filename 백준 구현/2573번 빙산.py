@@ -14,7 +14,6 @@ for i in range(N):
         if data[i][j] != 0:
             not_one.append([i, j])
 
-
 def bfs(a, b):
     queue = deque()
     queue.append([a, b])
@@ -28,6 +27,7 @@ def bfs(a, b):
                 if data[nx][ny] != 0 and visited[nx][ny] == 0:
                     visited[nx][ny] = 1
                     queue.append([nx, ny])
+
 
 
 ans = 0
@@ -56,5 +56,67 @@ while True:
     ans += 1
     if count > 1:
         break
+
+print(ans)
+
+
+from collections import deque
+N, M = map(int, input().split())
+data = []
+for _ in range(N):
+    data.append(list(map(int, input().split())))
+
+not_one = []
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
+visited = [[0] * M for _ in range(N)]
+for i in range(N):
+    for j in range(M):
+        if data[i][j] != 0:
+            not_one.append([i, j])
+
+def bfs(a, b):
+    queue = deque()
+    queue.append([a, b])
+    visited[a][b] = 1
+    while queue:
+        x, y = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < N and 0 <= ny < M:
+                if data[nx][ny] != 0 and visited[nx][ny] == 0:
+                    visited[nx][ny] = 1
+                    queue.append([nx, ny])
+                if data[nx][ny] == 0 and data[x][y] != 0:
+                    minus[x][y] += 1
+
+
+
+ans = -1
+temp_data = copy.deepcopy(data)
+while True:
+    minus = [[0] * M for _ in range(N)]
+    visited = [[0] * M for _ in range(N)]
+    count = 0
+    flag = False
+
+    for i in not_one:
+        if data[i[0]][i[1]] != 0 and visited[i[0]][i[1]] == 0:
+            bfs(i[0], i[1])
+            count += 1
+            flag = True
+    if not flag:
+        ans = 0
+        break
+    ans += 1
+    if count > 1:
+        break
+    for i in range(N):
+        for j in range(M):
+            if data[i][j] - minus[i][j] < 0:
+                data[i][j] = 0
+            else:
+                data[i][j] -= minus[i][j]
 
 print(ans)
