@@ -11,6 +11,7 @@ data = sorted(data, key=lambda x: x[2], reverse=True)
 data = sorted(data, key=lambda x: x[1], reverse=True)
 #print(data)
 flag = False
+flag2 = False
 for i in range(N):
     if flag:
         break
@@ -19,5 +20,10 @@ for i in range(N):
         for j in range(i, -1, -1):
             #print(j)
             if data[j][1] != data[i][1] or data[j][2] != data[i][2] or data[j][3] != data[i][3]:
+                #print("good")
                 print(j + 2)
+                flag2 = True
                 break
+if not flag2:
+    #print(":?s")
+    print(1)
