@@ -1,17 +1,22 @@
 S = input()
+
+array = [str(i) for i in range(10)]
+
 num = 0
+new_S = ""
+for i in S:
+    if i in array:
+        num += int(i)
+    else:
+        new_S += i
 
-alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-ans = ''
-for alp in S:
-    if int(ord(alp)) - int(ord('A')) < 0:
-        num += int(alp)
+new_S = sorted(new_S)
 
-for i in alphabet:
-    for alp in S:
-        if alp == i:
-            ans += alp
+if num !=0:
+    new_S += str(num)
+ans = ""
 
-ans += str(num)
+for i in new_S:
+    ans += i
 print(ans)

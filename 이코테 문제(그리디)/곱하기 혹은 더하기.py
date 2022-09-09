@@ -1,14 +1,16 @@
 n = str(input())
+n = int(n)
+n = str(n)
 
-result = 0
-
+ans = 0
 for i in range(len(n)):
-    if result == 0:
-        result = result + int(n[i])
+    if i == 0:
+        ans += int(n[i])
     else:
-        if int(n[i]) == 0 or int(n[i]) == 1:
-            result = result + int(n[i])
+        if n[i] == "0" or n[i] == "1":
+            ans += int(n[i])
         else:
-            result = result * int(n[i])
+            ans *= int(n[i])
 
-print(result)
+print(ans)
+    

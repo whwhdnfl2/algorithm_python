@@ -1,14 +1,14 @@
-n = int(input())
+N = int(input())
+array = list(map(int, input().split()))
 
-k = list(map(int, input().split()))
-k.sort()
+array.sort()
 
 result = 0
 count = 0
-for i in k:
+
+for i in array:
     count += 1
     if count >= i:
         result += 1
         count = 0
-
 print(result)
