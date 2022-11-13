@@ -1,6 +1,4 @@
-data = dict()
 
-data[1] = 1
-data[2] = 2
-
-print(data.keys())
+array = [1,2,3,5,6]
+for i in range(2,3):
+    print(array[i])

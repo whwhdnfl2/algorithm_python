@@ -1,49 +1,56 @@
 from collections import deque
 from copy import deepcopy
+import sys
+input = sys.stdin.readline
 
 N = int(input())
-number = list(map(int, input().split()))
-yon = list(map(int, input().split()))
+array1 = list(map(int, input().split()))
+array2 = list(map(int, input().split()))
 
+first = array1[0]
 
-
-def bfs(good, yon1):
+def bfs():
+    Min = 1e9
+    Max = -1e9
     queue = deque()
-    queue.append([0, good, yon1])
-    max = -999999999
-    min = 999999999
+    queue.append([array1[0], 0, array2])
     while queue:
-        count, num, temp = queue.popleft()
+        num, count, myarray = queue.popleft()
         if count == N - 1:
-            if num > max:
-                max = num
-            if num < min:
-                min = num
+            if Min > num:
+                Min = num
+            if Max < num:
+                Max = num
         else:
-            if temp[0] != 0:
-                temp2 = deepcopy(temp)
-                temp2[0] -= 1
-                queue.append([count + 1, num + number[count + 1], temp2])
-            if temp[1] != 0:
-                temp2 = deepcopy(temp)
-                temp2[1] -= 1
-                queue.append([count + 1, num - number[count + 1], temp2])
-            if temp[2] != 0:
-                temp2 = deepcopy(temp)
-                temp2[2] -= 1
-                queue.append([count + 1, num * number[count + 1], temp2])
-            if temp[3] != 0:
-                if num < 0:
-                    temp2 = deepcopy(temp)
-                    temp2[3] -= 1
-                    queue.append(([count + 1, -(abs(num) // number[count + 1]), temp2]))
-                else:
-                    temp2 = deepcopy(temp)
-                    temp2[3] -= 1
-                    queue.append(([count + 1, num // number[count + 1], temp2]))
-    return max, min
+            for i in range(4):
+                if myarray[i] != 0:
+                    if i == 0:
+                        temp_num = num + array1[count + 1]
+                        temp_array = deepcopy(myarray)
+                        temp_array[i] -= 1
+                        queue.append([temp_num, count + 1, temp_array])
+                    if i == 1:
+                        temp_num = num - array1[count + 1]
+                        temp_array = deepcopy(myarray)
+                        temp_array[i] -= 1
+                        queue.append([temp_num, count + 1, temp_array])
+                    if i == 2:
+                        temp_num = num * array1[count + 1]
+                        temp_array = deepcopy(myarray)
+                        temp_array[i] -= 1
+                        queue.append([temp_num, count + 1, temp_array])
+                    if i == 3:
+                        if num < 0:
+                            temp_num = -(abs(num) // array1[count + 1])
+                            temp_array = deepcopy(myarray)
+                            temp_array[i] -= 1
+                            queue.append([temp_num, count + 1, temp_array])
+                        else:
+                            temp_num = num // array1[count + 1]
+                            temp_array = deepcopy(myarray)
+                            temp_array[i] -= 1
+                            queue.append([temp_num, count + 1, temp_array])
+    return Min, Max
 
-
-ans_max, ans_min = bfs(number[0], yon)
-print(ans_max)
-print(ans_min)
+a, b = bfs()
+print(a, b)

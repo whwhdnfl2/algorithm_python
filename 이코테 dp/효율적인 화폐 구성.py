@@ -1,21 +1,20 @@
 N, M = map(int, input().split())
-money = []
-for i in range(N):
-    money.append(int(input()))
-data = [0] * 10001
-for i in money:
-    data[i] = 1
 
+array = []
+for _ in range(N):
+    array.append(int(input()))
 
-for i in range(money[len(money) - 1] + 1, M + 1):
-    ans = 10001
-    for j in money:
-        if data[i - j] != 0:
-            ans = min(ans, data[i - j] + 1)
-    data[i] = ans
+d = [10001] * (M + 1)
 
+d[0] = 0
+for i in array:
+    for j in range(i, M + 1):
+        if d[j - i] != 10001:
+            d[j] = min(d[j], d[j - i] + 1)
 
-if data[M] == 10001:
-    print(-1)
+if d[M] == 10001:
+    print("asdasd")
 else:
-    print(data[M])
+    print(d[M])
+
+print(d)

@@ -1,24 +1,5 @@
 from collections import deque
 
-def dfs(graph, v, visited):
-    visited[v] = True
-    print(v, end=' ')
-    for i in graph[v]:
-        if not visited[i]:
-            dfs(graph, i, visited)
-
-def bfs(graph, start, visited):
-    queue = deque()
-    queue.append(start)
-    visited[start] = True
-    while queue:
-        v = queue.popleft()
-        print(v, end= ' ')
-        for i in graph[v]:
-            if not visited[i]:
-                queue.append(i)
-                visited[i] = True
-
 graph = [
     [],
     [2, 3, 8],
@@ -31,6 +12,24 @@ graph = [
     [1, 7]
 ]
 visited = [False] * 9
+
+def dfs(graph, v, visited):
+    visited[v] = True
+    for i in graph[v]:
+        if visited[i] == False:
+            dfs(graph, visited[i], visited)
+
+def bfs(graph, start, visited):
+    queue = deque()
+    queue.append(start)
+    visited[start] = True
+    while queue:
+        v = queue.popleft()
+        for i in graph[v]:
+            queue.append(i)
+            visited[i] = True
+
+
 dfs(graph, 1, visited)
 print()
 visited = [False] * 9
